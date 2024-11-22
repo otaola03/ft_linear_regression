@@ -14,7 +14,6 @@ $(VENV_DIR):
 
 # Alias to explicitly create the virtual environment
 create: $(VENV_DIR)
-	@echo "\033[1;32m[✔] Virtual environment created.\033[0m"
 
 # Install dependencies from requirements.txt
 install: $(VENV_DIR)
