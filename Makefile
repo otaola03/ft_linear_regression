@@ -4,53 +4,48 @@ PYTHON = $(VENV_DIR)/bin/python
 PIP = $(VENV_DIR)/bin/pip
 REQ_FILE = requirements.txt
 
-# Comandos
+# Commands
 all: help
 
-# Crear el entorno virtual
+# Create the virtual environment
 $(VENV_DIR):
 	python3 -m venv $(VENV_DIR)
-	@echo "Entorno virtual creado en $(VENV_DIR)"
+	@echo "\033[1;32m[✔] Virtual environment created in $(VENV_DIR)\033[0m"
 
-# Crear el entorno virtual
+# Alias to explicitly create the virtual environment
 create: $(VENV_DIR)
-	@echo "Entorno virtual creado."
+	@echo "\033[1;32m[✔] Virtual environment created.\033[0m"
 
-# Eliminar el entorno virtual
-delete:
-	rm -rf $(VENV_DIR)
-	@echo "Entorno virtual eliminado."
-
-# Instalar dependencias desde requirements.txt
+# Install dependencies from requirements.txt
 install: $(VENV_DIR)
 	$(PIP) install --upgrade pip
 	$(PIP) install -r $(REQ_FILE)
-	@echo "Dependencias instaladas."
+	@echo "\033[1;34m[✔] Dependencies installed.\033[0m"
 
-# Guardar las dependencias actuales en requirements.txt
+# Save the current dependencies to requirements.txt
 freeze: $(VENV_DIR)
 	$(PIP) freeze > $(REQ_FILE)
-	@echo "Dependencias guardadas en $(REQ_FILE)."
+	@echo "\033[1;34m[✔] Dependencies saved to $(REQ_FILE).\033[0m"
 
-# Ejecutar tu aplicación (modifica app.py según tu archivo principal)
+# Run your application (modify app.py as needed)
 run: $(VENV_DIR)
 	$(PYTHON) app.py
+	@echo "\033[1;33m[✔] Application executed.\033[0m"
 
-# Limpiar archivos generados por Python y borrar el entorno virtual
+# Clean Python-generated files and delete the virtual environment
 clean:
 	rm -rf $(VENV_DIR)
 	find . -type f -name '*.pyc' -delete
 	find . -type d -name '__pycache__' -exec rm -rf {} +
-	@echo "Archivos temporales y entorno virtual eliminados."
+	@echo "\033[1;31m[✘] Temporary files and virtual environment removed.\033[0m"
 
-# Mostrar ayuda
+# Show help
 help:
-	@echo "Comandos disponibles:"
-	@echo "  make          - Mostrar esta ayuda."
-	@echo "  make create   - Crear el entorno virtual."
-	@echo "  make delete   - Eliminar el entorno virtual."
-	@echo "  make install  - Crear el entorno virtual e instalar dependencias."
-	@echo "  make freeze   - Guardar dependencias en requirements.txt."
-	@echo "  make run      - Ejecutar la aplicación."
-	@echo "  make clean    - Eliminar el entorno virtual y archivos temporales."
+	@echo "\033[1;36mAvailable commands:\033[0m"
+	@echo "\033[1;33m  make\033[0m          - Show this help message."
+	@echo "\033[1;33m  make create\033[0m   - Create the virtual environment."
+	@echo "\033[1;33m  make install\033[0m  - Create the virtual environment and install dependencies."
+	@echo "\033[1;33m  make freeze\033[0m   - Save dependencies to requirements.txt."
+	@echo "\033[1;33m  make run\033[0m      - Run the application."
+	@echo "\033[1;33m  make clean\033[0m    - Remove the virtual environment and temporary files."
 
