@@ -1,43 +1,19 @@
 import pandas as pd
-
-# def gradient_descent(m, b, data, L):
-#     N = len(data)
-#     m_gradient = 0
-#     b_gradient = 0
-#     for index, row in data.iterrows():
-#         x_value = row['km']
-#         y_value = row['price']
-#         
-#         print(f"x_value: {x_value}, y_value: {y_value}")
-#         m_gradient += -(2/N) * x_value * (y_value - ((m * x_value) + b))
-#         b_gradient += -(2/N) * (y_value - ((m * x_value) + b))
-#
-#         # print(f"m_gradient: {m_gradient}, b_gradient: {b_gradient}")
-#
-#     m = m - (L * m_gradient)
-#     b = b - (L * b_gradient)
-#     return (m, b)
+import numpy as np
 
 def gradient_descent(m_now, b_now, points, L):
-    m_gradient = 0
-    b_gradient = 0
     n = float(len(points))
     
-    for i in range(len(points)):
-        x = points.iloc[i]['km_normalized']
-        y = points.iloc[i]['price_normalized']
-        
-        # Cálculo del gradiente
-        m_gradient += -(2/n) * x * (y - (m_now * x + b_now))
-        b_gradient += -(2/n) * (y - (m_now * x + b_now))
+    x = points['km_normalized'].values
+    y = points['price_normalized'].values
     
-    # Actualización de m y b
+    m_gradient = - (2/n) * np.sum(x * (y - (m_now * x + b_now)))
+    b_gradient = - (2/n) * np.sum(y - (m_now * x + b_now))
+    
     m = m_now - (L * m_gradient)
     b = b_now - (L * b_gradient)
+    
     return m, b
-
-# def normalize(points):
-#     return points
 
 
 def train(points, L=0.0001):
@@ -57,9 +33,10 @@ def train(points, L=0.0001):
     
     for i in range(epochs):
         m, b = gradient_descent(m, b, points, L)
-        if i % 100 == 0:  # Mostrar progreso cada 100 épocas
+        if i % 100 == 0:
             print(f"Epoch {i+1}: m = {m}, b = {b}")
 
     m_original = m * (y_std / x_std)
     b_original = (b * y_std) + y_mean - m_original * x_mean
+
     return (m_original, b_original)
