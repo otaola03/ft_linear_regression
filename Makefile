@@ -34,6 +34,14 @@ run: $(VENV_DIR)
 	$(PYTHON) src/app.py
 	@echo "\033[1;33m[✔] Application executed.\033[0m"
 
+predict: $(VENV_DIR)
+	$(PYTHON) src/predict.py
+	@echo "\033[1;33m[✔] Prediction executed.\033[0m"
+
+train: $(VENV_DIR)
+	$(PYTHON) src/train.py
+	@echo "\033[1;33m[✔] Model trained.\033[0m"
+
 # Clean Python-generated files and delete the virtual environment
 clean:
 	rm -rf $(VENV_DIR)
