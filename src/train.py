@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 def compute_gradient(x, y, m_now, b_now):
     n = float(len(x))
@@ -52,18 +54,37 @@ def train(points, m=0, b=0, L=0.0001, epsilon=0.0001):
 
     return (m_original, b_original)
 
+
 def update_data(data, m, b):
     df = pd.read_csv('lib/line_data.csv')
     df.loc[0, 'm'] = float(m)
     df.loc[0, 'b'] = float(b)
     df.to_csv('lib/line_data.csv', index=False)
 
+def crete_plot(data, m, b):
+    x = data.iloc[:, 0]  # Primer columna como eje X
+    y = data.iloc[:, 1]  # Segunda columna como eje Y
+
+    plt.scatter(x, y, label='Data points', color='blue')
+
+    # Etiquetas y título
+    plt.xlabel('km')
+    plt.ylabel('price')
+    plt.title('Price of a car according to its km')
+
+    # Mostrar la leyenda
+    plt.legend()
+
+    # Mostrar el gráfico
+    plt.show()
 
 if __name__ == "__main__":
     data = pd.read_csv('lib/data.csv')
     actual_m, actual_b = pd.read_csv('lib/line_data.csv').values[0]
 
+
     new_m, new_b = train(data, actual_m, actual_b)
 
     update_data(data, new_m, new_b)
     print(new_m, new_b)
+    crete_plot(data, actual_m, actual_b)

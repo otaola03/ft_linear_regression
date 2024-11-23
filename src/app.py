@@ -1,9 +1,24 @@
 import pandas as pd
-from train import train
 import matplotlib.pyplot as plt
 
-def get_data(data):
-    return pd.read_csv(data)
+# Cargar el archivo CSV
+df = pd.read_csv('lib/data.csv')
 
-if __name__ == "__main__":
-    print("Training model...")
+# Ver las primeras filas del archivo CSV para entender la estructura
+print(df.head())
+
+# Supongamos que tienes dos columnas: 'x' y 'y' para graficar
+# Cambia los nombres de las columnas por los que tengas en tu CSV
+x = df['km']  # Reemplaza con el nombre de la columna para el eje X
+y = df['price']  # Reemplaza con el nombre de la columna para el eje Y
+
+# Crear el gráfico
+plt.plot(x, y)
+
+# Agregar etiquetas y título
+plt.xlabel('Nombre del Eje X')
+plt.ylabel('Nombre del Eje Y')
+plt.title('Título de tu gráfico')
+
+# Mostrar el gráfico
+plt.show()
