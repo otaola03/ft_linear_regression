@@ -41,7 +41,7 @@ def denormalize(x_mean, x_std, y_mean, y_std, m, b):
     return m_original, b_original
 
 
-def train(points, m=0, b=0, L=0.0001, epsilon=0.0001 , line_plot=None):
+def train(points, m=0, b=0, L=0.0001, epsilon=0.00001 , line_plot=None):
     x_mean = points['km'].mean()
     x_std = points['km'].std()
     y_mean = points['price'].mean()
@@ -54,11 +54,11 @@ def train(points, m=0, b=0, L=0.0001, epsilon=0.0001 , line_plot=None):
         m, b = gradient_descent(m, b, km_normalized, price_normalized, L)
         if i % 50 == 0:
             denormalize_m, denormalize_b = denormalize(x_mean, x_std, y_mean, y_std, m, b)
-            line_plot = update_line(points, denormalize_m, denormalize_b, line_plot)
+            update_line(points, denormalize_m, denormalize_b, line_plot)
+
         i += 1
 
     m_original, b_original = denormalize(x_mean, x_std, y_mean, y_std, m, b)
-
     return (m_original, b_original)
 
 
@@ -68,13 +68,14 @@ def update_data(data, m, b):
     df.loc[0, 'b'] = float(b)
     df.to_csv('lib/line_data.csv', index=False)
 
+
 #------------------ PLOT ------------------#
 
 def on_click(event, data, m, b, line_plot):
     print('Training...')
     new_m, new_b = train(data, m, b, L=0.01, epsilon=0.0001, line_plot=line_plot)
     update_data(data, new_m, new_b)
-    print(new_m, new_b)
+    print(f"y = {new_m.round(3)}x + {new_b.round(3)}")
 
 
 def crete_plot(data, m, b):
@@ -121,5 +122,4 @@ if __name__ == "__main__":
     b = 0
 
     line_plot = crete_plot(data, m, b)
-    plt.show()
 
