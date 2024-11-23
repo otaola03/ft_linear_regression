@@ -29,11 +29,6 @@ freeze: $(VENV_DIR)
 	$(PIP) freeze > $(REQ_FILE)
 	@echo "\033[1;34m[✔] Dependencies saved to $(REQ_FILE).\033[0m"
 
-# Run your application (modify app.py as needed)
-run: $(VENV_DIR)
-	$(PYTHON) src/app.py
-	@echo "\033[1;33m[✔] Application executed.\033[0m"
-
 predict: $(VENV_DIR)
 	$(PYTHON) src/predict.py
 	@echo "\033[1;33m[✔] Prediction executed.\033[0m"
@@ -57,6 +52,8 @@ help:
 	@echo "\033[1;33m  make install\033[0m  - Create the virtual environment and install dependencies."
 	@echo "\033[1;33m  make freeze\033[0m   - Save dependencies to requirements.txt."
 	@echo "\033[1;33m  make run\033[0m      - Run the application."
+	@echo "\033[1;33m  make predict\033[0m  - Run the prediction."
+	@echo "\033[1;33m  make train\033[0m    - Train the model."
 	@echo "\033[1;33m  make clean\033[0m    - Remove the virtual environment and temporary files."
 
 PHONY: all activate install freeze run clean help
