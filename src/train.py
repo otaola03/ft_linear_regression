@@ -23,6 +23,20 @@ def gradient_descent(m_now, b_now, x, y, L):
     return m, b
 
 
+def normalize(x_mean, x_std, y_mean, y_std, points):
+    km_normalized = ((points['km'] - x_mean) / x_std).values
+    price_normalized = ((points['price'] - y_mean) / y_std).values
+    
+    return km_normalized, price_normalized
+
+
+def denormalize(x_mean, x_std, y_mean, y_std, m, b):
+    m_original = y_std * m / x_std
+    b_original = y_std * b + y_mean - m_original * x_mean
+    
+    return m_original, b_original
+
+
 def train(points, L=0.0001, epsilon=0.0001):
     m = 0
     b = 0
@@ -32,14 +46,12 @@ def train(points, L=0.0001, epsilon=0.0001):
     y_mean = points['price'].mean()
     y_std = points['price'].std()
     
-    km_normalized = ((points['km'] - x_mean) / x_std).values
-    price_normalized = ((points['price'] - y_mean) / y_std).values
+    km_normalized, price_normalized = normalize(x_mean, x_std, y_mean, y_std, points)
     
     while (compute_gradient(km_normalized, price_normalized, m, b) > epsilon):
         m, b = gradient_descent(m, b, km_normalized, price_normalized, L)
 
-    m_original = m * (y_std / x_std)
-    b_original = (b * y_std) + y_mean - m_original * x_mean
+    m_original, b_original = denormalize(x_mean, x_std, y_mean, y_std, m, b)
 
     return (m_original, b_original)
 
