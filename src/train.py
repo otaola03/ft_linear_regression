@@ -37,10 +37,7 @@ def denormalize(x_mean, x_std, y_mean, y_std, m, b):
     return m_original, b_original
 
 
-def train(points, L=0.0001, epsilon=0.0001):
-    m = 0
-    b = 0
-
+def train(points, m=0, b=0, L=0.0001, epsilon=0.0001):
     x_mean = points['km'].mean()
     x_std = points['km'].std()
     y_mean = points['price'].mean()
@@ -55,8 +52,18 @@ def train(points, L=0.0001, epsilon=0.0001):
 
     return (m_original, b_original)
 
+def update_data(data, m, b):
+    df = pd.read_csv('lib/line_data.csv')
+    df.loc[0, 'm'] = float(m)
+    df.loc[0, 'b'] = float(b)
+    df.to_csv('lib/line_data.csv', index=False)
+
 
 if __name__ == "__main__":
     data = pd.read_csv('lib/data.csv')
-    m, b = train(data)
-    print(m, b)
+    actual_m, actual_b = pd.read_csv('lib/line_data.csv').values[0]
+
+    new_m, new_b = train(data, actual_m, actual_b)
+
+    update_data(data, new_m, new_b)
+    print(new_m, new_b)
