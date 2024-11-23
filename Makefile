@@ -51,7 +51,6 @@ help:
 	@echo "\033[1;33m  make activate\033[0m - Show how to activate the virtual environment."
 	@echo "\033[1;33m  make install\033[0m  - Create the virtual environment and install dependencies."
 	@echo "\033[1;33m  make freeze\033[0m   - Save dependencies to requirements.txt."
-	@echo "\033[1;33m  make run\033[0m      - Run the application."
 	@echo "\033[1;33m  make predict\033[0m  - Run the prediction."
 	@echo "\033[1;33m  make train\033[0m    - Train the model."
 	@echo "\033[1;33m  make clean\033[0m    - Remove the virtual environment and temporary files."
