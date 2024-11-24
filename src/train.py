@@ -69,11 +69,12 @@ def update_data(data, m, b):
 
 #------------------ PLOT ------------------#
 
-def on_click(event, data, m, b, line_plot, error_plot):
+def on_click(event, data, m, b, line_plot, error_plot, button):
     print('Training...')
     new_m, new_b = train(data, m, b, L=0.01, epsilon=0.0001, line_plot=line_plot, error_plot=error_plot)
     update_data(data, new_m, new_b)
     print(f"y = {new_m.round(3)}x + {new_b.round(3)}")
+    button.set_active(False)
 
 def create_plot(data, m, b):
     x = data['km']
@@ -96,13 +97,14 @@ def create_plot(data, m, b):
     # Gráfico del error
     ax2.set_xlabel('Iterations')
     ax2.set_ylabel('Error')
+    ax2.set_title('Error according to the iterations')
     error_plot, = ax2.plot([], [], label='Total Error', color='green')
     ax2.legend()
 
     # Botón para entrenar
     ax_button = plt.axes([0.8, 0.05, 0.15, 0.075])
     button = Button(ax_button, 'Train')
-    button.on_clicked(lambda event: on_click(event, data, m, b, line_plot, error_plot))
+    button.on_clicked(lambda event: on_click(event, data, m, b, line_plot, error_plot, button))
 
     plt.subplots_adjust(bottom=0.2)
     plt.subplots_adjust(hspace=0.5)  # Ajusta el espacio entre los subgráficos
