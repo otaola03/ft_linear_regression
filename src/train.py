@@ -131,6 +131,8 @@ def update_error_plot(iteration, error, error_plot):
     # Actualizar los datos del gráfico
     error_plot.set_xdata(x_data)
     error_plot.set_ydata(y_data)
+    error_plot.set_label(f"Total Error = {error:.3f}")
+    error_plot.axes.legend()
 
     # Recalcular y actualizar los límites de los ejes
     ax = error_plot.axes
