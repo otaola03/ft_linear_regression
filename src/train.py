@@ -11,19 +11,18 @@ def total_error(m, b, x, y):
 
 def compute_gradient(x, y, m_now, b_now):
     n = float(len(x))
-    m_gradient = - (2/n) * np.sum(x * (y - (m_now * x + b_now)))
-    b_gradient = - (2/n) * np.sum(y - (m_now * x + b_now))
+    m_gradient = - (2 / n) * np.sum(x * (y - (m_now * x + b_now)))
+    b_gradient = - (2 / n) * np.sum(y - (m_now * x + b_now))
 
     gradient = np.sqrt(m_gradient**2 + b_gradient**2)
-
     return gradient
 
 
 def gradient_descent(m_now, b_now, x, y, L):
     n = float(len(x))
     
-    m_gradient = - (2/n) * np.sum(x * (y - (m_now * x + b_now)))
-    b_gradient = - (2/n) * np.sum(y - (m_now * x + b_now))
+    m_gradient = - (2 / n) * np.sum(x * (y - (m_now * x + b_now)))
+    b_gradient = - (2 / n) * np.sum(y - (m_now * x + b_now))
     
     m = m_now - (L * m_gradient)
     b = b_now - (L * b_gradient)
@@ -45,7 +44,7 @@ def denormalize(x_mean, x_std, y_mean, y_std, m, b):
     return m_original, b_original
 
 
-def train(points, m=0, b=0, L=0.0001, epsilon=0.00001, line_plot=None, error_plot=None):
+def train(points, m=0, b=0, L=0.0001, epsilon=0.00001, line_plot=None, gradient_plot=None):
     x_mean = points['km'].mean()
     x_std = points['km'].std()
     y_mean = points['price'].mean()
@@ -54,18 +53,21 @@ def train(points, m=0, b=0, L=0.0001, epsilon=0.00001, line_plot=None, error_plo
     km_normalized, price_normalized = normalize(x_mean, x_std, y_mean, y_std, points)
     
     i = 0
-    while (compute_gradient(km_normalized, price_normalized, m, b) > epsilon):
+    gradient = compute_gradient(km_normalized, price_normalized, m, b)
+    while (gradient > epsilon):
         m, b = gradient_descent(m, b, km_normalized, price_normalized, L)
+        gradient = compute_gradient(km_normalized, price_normalized, m, b)
+
         if i % 10 == 0:
             denormalize_m, denormalize_b = denormalize(x_mean, x_std, y_mean, y_std, m, b)
             update_line(points, denormalize_m, denormalize_b, line_plot)
-            error = total_error(denormalize_m, denormalize_b, points['km'], points['price'])
-            update_error_plot(i, error, error_plot)
+            update_gradient_plot(i, gradient, gradient_plot)
 
         i += 1
 
     m_original, b_original = denormalize(x_mean, x_std, y_mean, y_std, m, b)
     return (m_original, b_original)
+
 
 def update_data(data, m, b):
     df = pd.read_csv('lib/line_data.csv')
@@ -76,9 +78,9 @@ def update_data(data, m, b):
 
 #------------------ PLOT ------------------#
 
-def on_click(event, data, m, b, line_plot, error_plot, button):
+def on_click(event, data, m, b, line_plot, gradient_plot, button):
     print('Training...')
-    new_m, new_b = train(data, m, b, L=0.01, epsilon=0.0001, line_plot=line_plot, error_plot=error_plot)
+    new_m, new_b = train(data, m, b, L=0.01, epsilon=0.0001, line_plot=line_plot, gradient_plot=gradient_plot)
     update_data(data, new_m, new_b)
     print(f"y = {new_m.round(3)}x + {new_b.round(3)}")
     button.set_active(False)
@@ -101,23 +103,23 @@ def create_plot(data, m, b):
     line_plot, = ax1.plot(x, y_line, label=f'y = {m}x + {b}', color='red')
     ax1.legend()
 
-    # Error plot
+    # Gradient plot
     ax2.set_xlabel('Iterations')
-    ax2.set_ylabel('Error')
-    ax2.set_title('Error according to the iterations')
-    error_plot, = ax2.plot([], [], label='Total Error', color='green')
+    ax2.set_ylabel('Gradient')
+    ax2.set_title('Gradient magnitude during training')
+    gradient_plot, = ax2.plot([], [], label='Gradient', color='orange')
     ax2.legend()
 
     # Train button
     ax_button = plt.axes([0.8, 0.05, 0.15, 0.075])
     button = Button(ax_button, 'Train')
-    button.on_clicked(lambda event: on_click(event, data, m, b, line_plot, error_plot, button))
+    button.on_clicked(lambda event: on_click(event, data, m, b, line_plot, gradient_plot, button))
 
     plt.subplots_adjust(bottom=0.2)
     plt.subplots_adjust(hspace=0.5)
     plt.show(block=True)
 
-    return (line_plot, error_plot)
+    return (line_plot, gradient_plot)
 
 
 def update_line(data, m, b, line_plot):
@@ -131,16 +133,16 @@ def update_line(data, m, b, line_plot):
     return line_plot
 
 
-def update_error_plot(iteration, error, error_plot):
-    x_data = np.append(error_plot.get_xdata(), iteration)
-    y_data = np.append(error_plot.get_ydata(), error)
+def update_gradient_plot(iteration, gradient, gradient_plot):
+    x_data = np.append(gradient_plot.get_xdata(), iteration)
+    y_data = np.append(gradient_plot.get_ydata(), gradient)
     
-    error_plot.set_xdata(x_data)
-    error_plot.set_ydata(y_data)
-    error_plot.set_label(f"Total Error = {error:.3f}")
-    error_plot.axes.legend()
+    gradient_plot.set_xdata(x_data)
+    gradient_plot.set_ydata(y_data)
+    gradient_plot.set_label(f"Gradient = {gradient:.3f}")
+    gradient_plot.axes.legend()
 
-    ax = error_plot.axes
+    ax = gradient_plot.axes
     ax.relim()
     ax.autoscale_view()
 
@@ -148,11 +150,10 @@ def update_error_plot(iteration, error, error_plot):
     plt.pause(0.1)
 
 
-
 if __name__ == "__main__":
     data = pd.read_csv('lib/data.csv')
     m = 0
     b = 0
 
-    line_plot, error_plot = create_plot(data, m, b)
+    line_plot, gradient_plot = create_plot(data, m, b)
 
