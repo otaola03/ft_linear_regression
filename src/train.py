@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 
 
+def total_error(m, b, x, y):
+    total_error = np.sum((y - (m * x + b))**2)
+    return total_error / float(len(x))
+    
+
 
 def compute_gradient(x, y, m_now, b_now):
     n = float(len(x))
