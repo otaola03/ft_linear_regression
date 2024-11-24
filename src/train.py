@@ -50,7 +50,7 @@ def train(points, m=0, b=0, L=0.0001, epsilon=0.00001, line_plot=None, error_plo
     i = 0
     while (compute_gradient(km_normalized, price_normalized, m, b) > epsilon):
         m, b = gradient_descent(m, b, km_normalized, price_normalized, L)
-        if i % 50 == 0:
+        if i % 10 == 0:
             denormalize_m, denormalize_b = denormalize(x_mean, x_std, y_mean, y_std, m, b)
             update_line(points, denormalize_m, denormalize_b, line_plot)
             error = total_error(denormalize_m, denormalize_b, points['km'], points['price'])
@@ -120,11 +120,26 @@ def update_line(data, m, b, line_plot):
     plt.pause(0.1)
     return line_plot
 
+
 def update_error_plot(iteration, error, error_plot):
-    error_plot.set_xdata(np.append(error_plot.get_xdata(), iteration))
-    error_plot.set_ydata(np.append(error_plot.get_ydata(), error))
+    # Obtener los datos actuales del gráfico
+    x_data = np.append(error_plot.get_xdata(), iteration)
+    y_data = np.append(error_plot.get_ydata(), error)
+    
+    # Actualizar los datos del gráfico
+    error_plot.set_xdata(x_data)
+    error_plot.set_ydata(y_data)
+
+    # Recalcular y actualizar los límites de los ejes
+    ax = error_plot.axes
+    ax.relim()  # Recalcula los límites según los nuevos datos
+    ax.autoscale_view()  # Ajusta la vista de los ejes automáticamente
+
+    # Redibujar el gráfico
     plt.draw()
     plt.pause(0.1)
+
+
 
 if __name__ == "__main__":
     data = pd.read_csv('lib/data.csv')
