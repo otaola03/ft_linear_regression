@@ -79,11 +79,11 @@ def update_data(data, m, b):
 #------------------ PLOT ------------------#
 
 def on_click(event, data, m, b, line_plot, gradient_plot, button):
+    button.set_active(False)
     print('Training...')
     new_m, new_b = train(data, m, b, L=0.01, epsilon=0.0001, line_plot=line_plot, gradient_plot=gradient_plot)
     update_data(data, new_m, new_b)
     print(f"y = {new_m.round(3)}x + {new_b.round(3)}")
-    button.set_active(False)
 
 
 def create_plot(data, m, b):
