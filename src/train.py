@@ -104,7 +104,8 @@ def create_plot(data, m, b):
     button = Button(ax_button, 'Train')
     button.on_clicked(lambda event: on_click(event, data, m, b, line_plot, error_plot))
 
-    plt.subplots_adjust(hspace=0.4)  # Ajusta el espacio entre los subgráficos
+    plt.subplots_adjust(bottom=0.2)
+    plt.subplots_adjust(hspace=0.5)  # Ajusta el espacio entre los subgráficos
     plt.show(block=True)  # Esto asegura que la ventana de matplotlib no se cierre automáticamente
 
     return (line_plot, error_plot)
