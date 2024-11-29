@@ -28,15 +28,20 @@ $$
 
 ### Parabola
 To understand it better, this three variable function is a convex one, so representend in a 3D plane it will be a parabola. This means that the curve forms a "bowl" shape, and in it's lowest point, in the minimun, is the value we want to find. It's the poiint that indicates us the best m and b values to minimize the error.
+
+<img src="https://shorturl.at/e6Jp7" width="500">
+
 ## Gradient Method
-To find this find the (\( m \) and \( b \)) that minimize the MSE we have to try with different values of m and b until we find the minimal ones. But if we try this values in a random way finding the correct ones will be eternal. That's way we use the **Gradient Method**.
+To find this find the $m$ and $b$ that minimize the MSE we have to try with different values of m and b until we find the minimal ones. But if we try this values in a random way finding the correct ones will be eternal. That's way we use the **Gradient Method**.
 
 
-The **gradient** is a vector that contains the partial derivatives of the cost function \( J(m, b) \) with respect to each coefficients. These derivatives tell us the direction of the steepest ascent of \( J(m, b) \).
+The **gradient** is a vector that contains the partial derivatives of the cost function \( J(m, b) \) with respect to each coefficients. These derivatives tell us the direction of the steepest ascent of $J(m, b)$.
 
-### Partial Derivative with Respect to \( m \) (Slope):
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Gradient2.svg/512px-Gradient2.svg.png?20210513164705" width="500">
 
-The partial derivative of \( J(m, b) \) with respect to the slope \( m \) is:
+### Partial Derivative with Respect to $m$ (Slope):
+
+The partial derivative of $J(m, b)$ with respect to the slope $m$ is:
 
 $$
 \frac{\partial J(m, b)}{\partial m} = \frac{1}{n} \sum_{i=1}^{n} (y_i - (mx_i + b)) \cdot x_i
@@ -78,3 +83,5 @@ Where:
 - The partial derivatives $\frac{\partial J(m, b)}{\partial m}$ and $\frac{\partial J(m, b)}{\partial b}$ guide the direction of the update for each parameter.
 
 This process is repeated for a set number of iterations or until the cost function converges to a minimum.
+
+<img src="https://doimages.nyc3.cdn.digitaloceanspaces.com/010AI-ML/content/images/2018/05/fastlr.png" width="500">
