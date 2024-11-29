@@ -26,7 +26,7 @@ $$
 - $\hat{y}_i = m x_i + b$: The predicted value for the $i$-th example.
 - $y_i$: The actual value for the $i$-th example.
 
-<img src="https://i.imgur.com/tqnei6J.jpg" width="500">
+<img src="https://cdn.hackernoon.com/images/GM6DSaJcTeUSvYIRlwBoj4pUrXi1-u9g3hhm.jpeg" width="500">
 
 ### Parabola
 To understand it better, this three variable function is a convex one, so representend in a 3D plane it will be a parabola. This means that the curve forms a "bowl" shape, and in it's lowest point, in the minimun, is the value we want to find. It's the poiint that indicates us the best $m$ and $b$ values to minimize the error.
