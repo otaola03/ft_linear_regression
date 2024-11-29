@@ -23,7 +23,7 @@ $$
 ### Where:
 - **J(m, b)**: The cost function (average error).
 - **n**: The number of examples in the dataset.
-- $\hat{y}_i$ = m x_i + b$: The predicted value for the $i$-th example.
+- $\hat{y}_i = m x_i + b$: The predicted value for the $i$-th example.
 - $y_i$: The actual value for the $i$-th example.
 
 <img src="https://i.imgur.com/tqnei6J.jpg" width="500">
