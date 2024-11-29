@@ -88,10 +88,9 @@ This process is repeated for a set number of iterations or until the cost functi
 
 <img src="https://doimages.nyc3.cdn.digitaloceanspaces.com/010AI-ML/content/images/2018/05/fastlr.png" width="500">
 
-## Why Use Different Methods for Linear Regression?
+## Setting the gradient to zero when we have a simple linear regression (two variables, $y = mx + b$)
 The best way to get a linear regression for most of the data set it's using the gradient descent method. However when you only have 2 variables it will be possible to achive a better result using another and shorter method.
 
-### Simple Linear Regression (two variables, $y = mx + b$)  
 Setting the gradient to zero is better because it provides a **direct solution**. The formulas for $m$ and $b$ can be derived algebraically, and solving them requires only a single computation, regardless of the dataset size. This approach avoids the iterative process of gradient descent, making it faster and computationally cheaper in this case.
 
 To find the slope $m$ and intercept $b$ by setting the gradients of the cost function to zero, we derive the following equations:
@@ -112,7 +111,17 @@ To find the slope $m$ and intercept $b$ by setting the gradients of the cost fun
 
 These two equations form a system that can be solved to compute $m$ and $b$.
 
-### Why Gradient Descent is More Efficient for Many Variables
+### Why Set the Gradient to Zero?
+
+The **derivative** of a function tells us how the slope of the function changes at any given point. If the derivative is positive, the function is increasing; if it’s negative, it’s decreasing. If the derivative is zero, the slope is **horizontal** — the tangent line is flat at that point.
+
+In linear regression, the derivative of the error function with respect to the parameters \( m \) (slope) and \( b \) (intercept) tells us how the error changes when we adjust these parameters. By **setting the derivative to zero**, we find the point where the slope of the error function is horizontal, meaning the error can no longer decrease or increase — it has reached its **minimum**.
+
+#### Summary:
+- **Derivative = 0**: The slope of the error function is zero (the tangent is horizontal).
+- In linear regression, the error function is convex, so the point where the derivative is zero corresponds to the **global minimum**, which gives us the optimal values for \( m \) and \( b \) (the best-fitting line).
+
+## Why Gradient Descent is More Efficient for Many Variables
 
 1. **Direct Method (Matrix Inversion)**:
    - For multiple variables, solving $\mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$ requires matrix inversion, which has a cost of $O(k^3)$, where $k$ is the number of variables.
