@@ -27,7 +27,7 @@ $$
 - $y_i$: The actual value for the $i$-th example.
 
 ### Parabola
-To understand it better, this three variable function is a convex one, so representend in a 3D plane it will be a parabola. This means that the curve forms a "bowl" shape, and in it's lowest point, in the minimun, is the value we want to find. It's the poiint that indicates us the best m and b values to minimize the error.
+To understand it better, this three variable function is a convex one, so representend in a 3D plane it will be a parabola. This means that the curve forms a "bowl" shape, and in it's lowest point, in the minimun, is the value we want to find. It's the poiint that indicates us the best $m$ and $b$ values to minimize the error.
 
 <img src="https://shorturl.at/e6Jp7" width="500">
 
