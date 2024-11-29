@@ -1,5 +1,6 @@
 
 # ft_linear_regression
+This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
 
 Create a simple lineal regresion from a data set to predict the price of a car depending on it's Km
 
