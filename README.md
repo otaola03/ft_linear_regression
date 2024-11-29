@@ -33,6 +33,24 @@ To understand it better, this three variable function is a convex one, so repres
 
 <img src="https://shorturl.at/e6Jp7" width="500">
 
+### More than two variable
+
+When there are more than two independent variables in a linear regression model, the cost function $J$ depends on more than two parameters. For example, in a regression with three independent variables $( x_1, x_2, x_3 )$, the model is expressed as:
+
+$$
+\hat{y} = m_1x_1 + m_2x_2 + m_3x_3 + b
+$$
+
+Here, the cost function $J$ becomes a function of **four parameters** $( m_1, m_2, m_3, b )$:
+
+$$
+J(m_1, m_2, m_3, b) = \frac{1}{n} \sum_{i=1}^{n} \left( \hat{y}_i - y_i \right)^2
+$$
+
+Representing this cost function graphically in 3D is **impossible**, as it would require **five dimensions**: one for each parameter $( m_1, m_2, m_3, b )$ and one for the cost $J$.
+
+Instead, we rely on **gradient descent** or other optimization methods to navigate this multidimensional space and minimize $J$, as visualizing it is not feasible.
+
 ## Gradient Method
 To find this find the $m$ and $b$ that minimize the MSE we have to try with different values of m and b until we find the minimal ones. But if we try this values in a random way finding the correct ones will be eternal. That's way we use the **Gradient Method**.
 
