@@ -6,10 +6,8 @@ Create a simple lineal regresion from a data set to predict the price of a car d
 ## Basic Concepts
 Linear regression is a model that uses a straight line to show how one variable depends on another, including a margin of error for the unpredictable. In a easy go to understand, is like a mean representend in a linear way that gives you the more approximated output value y to its corresponding input value x.
 
-The formula of a simple linear regresion is the next one:
-$$
-y = mx + b
-$$
+The formula of a simple linear regresion is the next one: $y = mx + b$
+
 ### Where:
 - **\( y \)**: The dependent variable (the value we want to predict).
 - **\( x \)**: The independent variable (the input or feature).
@@ -77,6 +75,6 @@ $$
 Where:
 
 - $\alpha$ is the **learning rate**, a small value that controls how much the parameters $m$ and $b$ are adjusted during each iteration.
-- The partial derivatives \( \frac{\partial J(m, b)}{\partial m} \) and \( \frac{\partial J(m, b)}{\partial b} \) guide the direction of the update for each parameter.
+- The partial derivatives $\frac{\partial J(m, b)}{\partial m}$ and $\frac{\partial J(m, b)}{\partial b}$ guide the direction of the update for each parameter.
 
 This process is repeated for a set number of iterations or until the cost function converges to a minimum.
