@@ -18,15 +18,15 @@ $$
 ## Main objective
 The goal of linear regression is to find the parameters (\( m \) and \( b \)) that minimize the **Mean Squared Error (MSE)**, which measures the discrepancy between the predicted values (\( \hat{y} \)) and the actual values (\( y \)):
 
-\[
+$$
 J(m, b) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
-\]
+$$
 
 ### Where:
 - **J(m, b)**: The cost function (average error).
 - **n**: The number of examples in the dataset.
-- **$ \hat{y}_i = m x_i + b $**: The predicted value for the $ i $-th example.
-- **$ y_i $**: The actual value for the $ i $-th example.
+- **$ \hat{y}_i = m x_i + b **: The predicted value for the $ i $-th example.
+- **$ y_i **: The actual value for the $ i $-th example.
 
 ### Parabola
 To understand it better, this three variable function is a convex one, so representend in a 3D plane it will be a parabola. This means that the curve forms a "bowl" shape, and in it's lowest point, in the minimun, is the value we want to find. It's the poiint that indicates us the best m and b values to minimize the error.
