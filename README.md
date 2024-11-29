@@ -1,6 +1,5 @@
 
 # ft_linear_regression
-This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
 
 Create a simple lineal regresion from a data set to predict the price of a car depending on it's Km
 
@@ -26,7 +25,7 @@ $$
 ### Where:
 - **J(m, b)**: The cost function (average error).
 - **n**: The number of examples in the dataset.
-- **$ \hat{y}_i = m x_i + b **: The predicted value for the $ i $-th example.
+- $\hat{y}_i = m x_i + b$: The predicted value for the $ i $-th example.
 - **$ y_i **: The actual value for the $ i $-th example.
 
 ### Parabola
