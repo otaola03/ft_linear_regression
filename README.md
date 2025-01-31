@@ -102,6 +102,8 @@ Where:
 - $\alpha$ is the **learning rate**, a small value that controls how much the parameters $m$ and $b$ are adjusted during each iteration.
 - The partial derivatives $\frac{\partial J(m, b)}{\partial m}$ and $\frac{\partial J(m, b)}{\partial b}$ guide the direction of the update for each parameter.
 
+<img src="https://cdn.kastatic.org/ka-perseus-images/7980cfd5fbfe1ac2ab08c16bbd0951447619b135.png" width="500">
+
 This process is repeated for a set number of iterations or until the cost function converges to a minimum.
 
 <img src="https://doimages.nyc3.cdn.digitaloceanspaces.com/010AI-ML/content/images/2018/05/fastlr.png" width="500">
