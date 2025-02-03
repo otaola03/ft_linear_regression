@@ -64,7 +64,7 @@ The **gradient** is a vector that contains the partial derivatives of the cost f
 The partial derivative of $J(m, b)$ with respect to the slope $m$ tell us the direction of the steepest ascent of $J(m, b)$ in the $m$ axis having a fiexd $b$:
 
 $$
-\frac{\partial J(m, b)}{\partial m} = \frac{1}{n} \sum_{i=1}^{n} (y_i - (mx_i + b)) \cdot x_i
+\frac{\partial J(m, b)}{\partial m} = \frac{2}{n} \sum_{i=1}^{n} (y_i - (mx_i + b)) \cdot x_i
 $$
 
 Where:
@@ -77,7 +77,7 @@ Where:
 The partial derivative of $J(m, b)$ with respect to the intercept $b$ tell us the direction of the steepest ascent of $J(m, b)$ in the $b$ axis having a fiexd $m$:
 
 $$
-\frac{\partial J(m, b)}{\partial b} = \frac{1}{n} \sum_{i=1}^{n} (y_i - (mx_i + b))
+\frac{\partial J(m, b)}{\partial b} = \frac{2}{n} \sum_{i=1}^{n} (y_i - (mx_i + b))
 $$
 
 Where:
